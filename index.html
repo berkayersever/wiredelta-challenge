@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body onload="currentDate()">
+
+<script type="text/javascript">
+    function currentDate(){
+        let today = new Date();
+        let week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        let month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        document.getElementById('dateTextArea').innerHTML = week[today.getDay()] + " " + today.getDate() + ". " + month[today.getMonth()] + " " + today.getFullYear()
+    }
+</script>
+
+<div align="right">
+    <h2>Today is <span id="dateTextArea"></span></h2>
+</div>
+</body>
+</html>
