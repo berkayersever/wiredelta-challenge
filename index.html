@@ -22,7 +22,7 @@
         let today = new Date();
         let week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
         let month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-        document.getElementById('dateTextArea').innerHTML = week[today.getDay()] + " " + today.getDate() + ". " + month[today.getMonth()] + " " + today.getFullYear();
+        document.getElementById('dateTextArea').innerHTML = week[today.getDay()] + " " + suffix(today.getDate()) + ". " + month[today.getMonth()] + " " + today.getFullYear();
     }
 </script>
 
