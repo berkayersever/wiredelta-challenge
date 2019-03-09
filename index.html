@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
-<body onload="currentDate()">
+<body onload="start()">
 
 <script type="text/javascript">
     function suffix(i) {
@@ -25,13 +25,20 @@
         document.getElementById('dateTextArea').innerHTML = week[today.getDay()] + " " + suffix(today.getDate()) + " " + month[today.getMonth()] + " " + today.getFullYear();
     }
 
-    function curentTime(){
+    function currentTime(){
+        let time = new Date();
+        document.getElementById('timeTextArea').innerHTML = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    }
 
+    function start(){
+        currentDate();
+        currentTime();
     }
 </script>
 
 <div align="right">
     <h2>Today is <span id="dateTextArea"></span></h2>
+    <h2><span id="timeTextArea"></span></h2>
 </div>
 </body>
 </html>
