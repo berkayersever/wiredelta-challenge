@@ -1,1 +1,1 @@
-# wiredelta-challenge
+# Wiredelta Challenge
