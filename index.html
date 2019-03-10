@@ -2,47 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Wiredelta Challenge</title>
 </head>
 <style>
+    /* Dropdown Button */
     .dropbtn {
-        background-color: #3498DB;
+        background-color: #4CAF50;
         color: white;
         padding: 16px;
         font-size: 16px;
         border: none;
-        cursor: pointer;
     }
 
-    .dropbtn:hover, .dropbtn:focus {
-        background-color: #2980B9;
-    }
-
+    /* The container <div> - needed to position the dropdown content */
     .dropdown {
         position: relative;
         display: inline-block;
     }
 
+    /* Dropdown Content (Hidden by Default) */
     .dropdown-content {
         display: none;
         position: absolute;
         background-color: #f1f1f1;
         min-width: 160px;
-        overflow: auto;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
 
-    .dropdown-content a {
+    /* Links inside the dropdown */
+    .dropdown-content p {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
     }
 
-    .dropdown a:hover {background-color: #ddd;}
+    /* Change color of dropdown links on hover */
+    .dropdown-content p:hover {background-color: #ddd;}
 
-    .show {display: block;}
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+    /*Style for Tabs*/
+
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
 </style>
 <body onload="start()">
 
@@ -103,12 +146,50 @@
         });
     }
 
-    function createTable(obj) {
-        var columnHeadings = Object.keys(obj[0]);                   // Table Headings
-        var columnCount = columnHeadings.length;                    // Count of the Columns
-        var rowCount = obj.length;                                  // Count of the Rows
-        var table = document.createElement('table');                // Create the Table
-        document.getElementById("data-list").appendChild(table);    // Use "data-list" in HTML
+    // function createTable(obj) {
+    //     var columnHeadings = Object.keys(obj[0]);                                    // Table Headings
+    //     var columnCount = columnHeadings.length;                                    // Count of the Columns
+    //     var rowCount = obj.length;                                                  // Count of the Rows
+    //     var table = document.createElement('table', { id : 'today' });              // Create the Table
+    //     document.getElementById("data-list").appendChild(table);                    // Use "data-list" in HTML
+    //
+    //     var header = table.createTHead();
+    //     var row = header.insertRow(-1);
+    //     for (let i = 0; i < columnCount; i++) {
+    //         var headerCell = document.createElement('th');
+    //         headerCell.innerText = columnHeadings[i].toUpperCase();
+    //         row.appendChild(headerCell);
+    //     }
+    //     var tBody = document.createElement('tbody');                // Create table body
+    //     table.appendChild(tBody);
+    //     // Add the data rows to the table body
+    //     for (var i = 0; i < rowCount; i++) {                        // Each row
+    //         row = tBody.insertRow(-1);
+    //         for (var j = 0; j < columnCount; j++) {                 // Each column
+    //             var cell = row.insertCell(-1);
+    //             cell.setAttribute('data-label', columnHeadings[j].toUpperCase());
+    //             var object = obj[i];
+    //             cell.innerText = object[columnHeadings[j]];
+    //         }
+    //     }
+    // }
+
+    function createTable(obj, val) {
+        var columnHeadings = Object.keys(obj[0]);                                   // Table Headings
+        var columnCount = columnHeadings.length;                                    // Count of the Columns
+        var rowCount = obj.length;                                                  // Count of the Rows
+        var table;
+        if(val == 'today') {
+            table = document.createElement('table', { id : 'today' });              // Create the Table
+            document.getElementById("today").appendChild(table);                    // Use "data-list" in HTML
+            console.log("Today");
+        }
+        else if(val == 'tomorrow') {
+            table = document.createElement('table', { id : 'tomorrow' });           // Create the Table
+            document.getElementById("tomorrow").appendChild(table);                    // Use "data-list" in HTML
+            console.log("Tomorrow");
+        }
+        // document.getElementById("data-list").appendChild(table);                    // Use "data-list" in HTML
 
         var header = table.createTHead();
         var row = header.insertRow(-1);
@@ -143,32 +224,110 @@
             // Parse JSON string into object
             var actual_JSON = JSON.parse(response);
             var json = getDays(actual_JSON, dayName);
-            createTable(json);
+            // createTable(json, 'today');
+            // createTable(json, 'tomorrow');
         });
     }
+
+    function tomorrow() {
+        var tomorrow = new Date();
+        var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        loadJSON(function (response) {
+            // Parse JSON string into object
+            var actual_JSON = JSON.parse(response);
+            var json = getDays(actual_JSON, week[tomorrow.getDay()+1]);
+            createTable(json, 'tomorrow');
+        });
+    }
+
+    function openTab(event, dayName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(dayName).style.display = "block";
+        event.currentTarget.className += " active";
+    }
+
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    };
+
+    function changeBackground(backgroundColor){
+        document.body.style.backgroundColor = backgroundColor;
+    }
+
 </script>
+
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'today')">Today</button>
+    <!--<button class="tablinks" onclick="tomorrow()">Tomorrow</button>-->
+    <button class="tablinks" onclick="openTab(event, 'tomorrow')">Tomorrow</button>
+</div>
 
 <div align="center">
     <h2>Today is <span id="dateTextArea"></span></h2>
     <h2><span id="timeTextArea"></span></h2>
 </div>
 
-<div align="center" id="data-list"></div>
+<!--<div align="center" id="data-list"></div>-->
 
 <div>
     <input id="title-text" type="text">
-    <input type="submit" value="change title" onclick="dynamicTitle()">
+    <input type="submit" value="Change Title" onclick="dynamicTitle()">
 </div>
 
-<div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-    <div id="myDropdown" class="dropdown-content">
-        <p>Red</p>
-        <p>Blue</p>
-        <p>Green</p>
+<div class="dropdown" >
+    <button onclick="myFunction()" class="dropbtn">Background Color</button>
+    <div id="myDropdown" class="dropdown-content" onclick="changeBackground(this.value)">
+        <p onclick="changeBackground('red')">Red</p>
+        <p onclick="changeBackground('green')">Green</p>
+        <p onclick="changeBackground('blue')">Blue</p>
+        <p onclick="changeBackground('white')">White</p>
     </div>
 </div>
 
+
+
+<!-- Tab content -->
+<div id="today" class="tabcontent">
+    <h3>Today's Tasks</h3>
+    <p>London is the capital city of England.</p>
+</div>
+
+<div id="tomorrow" class="tabcontent">
+    <h3>Tomorrow's Tasks</h3>
+    <p>Paris is the capital of France.</p>
+</div>
 
 </body>
 </html>
