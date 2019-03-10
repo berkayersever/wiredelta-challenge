@@ -90,6 +90,11 @@
             }
         }
     }
+    
+    function dynamicTitle() {
+        var title = document.getElementById('title-text')
+        document.title = title.value;
+    }
 
     function start() {
         let dayName = currentDate();
@@ -108,6 +113,13 @@
     <h2><span id="timeTextArea"></span></h2>
 </div>
 
-<div id="data-list"></div>
+<div align="center" id="data-list"></div>
+
+<div>
+    <input id="title-text" type="text">
+    <input type="submit" value="change title" onclick="dynamicTitle()">
+</div>
+
+
 </body>
 </html>
