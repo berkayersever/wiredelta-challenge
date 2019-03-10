@@ -7,6 +7,33 @@
 <body onload="start()">
 
 <script type="text/javascript">
+    function loadJSON(callback) {
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', 'tasks.json', true);                   //  Replace 'tasks' with the path to your file
+        xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200")
+                callback(xobj.responseText);                    // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+        };
+        xobj.send(null);
+    }
+
+
+    function getDays(obj, val) {
+        var jsonArr = [];
+        // jsonArr.push({days:, });
+        for (let i in obj) {
+            if (obj[i].day === val) {
+                jsonArr.push({
+                    time: obj[i].time,
+                    description: obj[i].description,
+                });
+            }
+        }
+       return jsonArr;
+    }
+
+
     function suffix(i) {
         var j = i % 10, k = i % 100;
         if (j == 1 && k != 11)
@@ -18,27 +45,69 @@
         return i + "th";
     }
 
-    function currentDate(){
-        let today = new Date();
-        let week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        let month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    function currentDate() {
+        var today = new Date();
+        var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         document.getElementById('dateTextArea').innerHTML = week[today.getDay()] + " " + suffix(today.getDate()) + " " + month[today.getMonth()] + " " + today.getFullYear();
+        return week[today.getDay()];
     }
 
-    function currentTime(){
+
+    function currentTime() {
         let time = new Date();
-        document.getElementById('timeTextArea').innerHTML = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+        document.getElementById('timeTextArea').innerHTML = time.toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        });
     }
 
-    function start(){
-        currentDate();
+    function createTable(obj) {
+        var columnHeadings = Object.keys(obj[0]);                   // Table Headings
+        var columnCount = columnHeadings.length;                    // Count of the Columns
+        var rowCount = obj.length;                                  // Count of the Rows
+        var table = document.createElement('table');                // Create the Table
+        document.getElementById("data-list").appendChild(table);    // Use "data-list" in HTML
+
+        var header = table.createTHead();
+        var row = header.insertRow(-1);
+        for (let i = 0; i < columnCount; i++) {
+            var headerCell = document.createElement('th');
+            headerCell.innerText = columnHeadings[i].toUpperCase();
+            row.appendChild(headerCell);
+        }
+        var tBody = document.createElement('tbody');                // Create table body
+        table.appendChild(tBody);
+                                                                    // Add the data rows to the table body
+        for (var i = 0; i < rowCount; i++) {                        // Each row
+            row = tBody.insertRow(-1);
+            for (var j = 0; j < columnCount; j++) {                 // Each column
+                var cell = row.insertCell(-1);
+                cell.setAttribute('data-label', columnHeadings[j].toUpperCase());
+                var object = obj[i];
+                cell.innerText = object[columnHeadings[j]];
+            }
+        }
+    }
+
+    function start() {
+        let dayName = currentDate();
         currentTime();
+        loadJSON(function (response) {
+            // Parse JSON string into object
+            var actual_JSON = JSON.parse(response);
+            var json = getDays(actual_JSON, dayName);
+            createTable(json);
+        });
     }
 </script>
 
-<div align="right">
+<div align="center">
     <h2>Today is <span id="dateTextArea"></span></h2>
     <h2><span id="timeTextArea"></span></h2>
 </div>
+
+<div id="data-list"></div>
 </body>
 </html>
