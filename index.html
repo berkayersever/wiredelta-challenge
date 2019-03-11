@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Wiredelta Challenge</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <style>
     /* Dropdown Button */
@@ -174,6 +175,220 @@
     //     }
     // }
 
+    var obj=[{Firstname:"Bob",Lastname:"Mayer",Email:"bob@mayer.com",Number: "123456789"},{Firstname:"Steven",Lastname:"Spil",Email:"steven@spill.com",Number: "987654321"},{Firstname:"Paul",Lastname:"Taucker",Email:"paul@tack.com",Number: "578954321"}];
+
+    function responsiveTable(obj, val) {
+
+        // let columnHeadings = Object.keys(obj[0]);                                   // Table Headings
+        // let columnCount = columnHeadings.length;                                    // Count of the Columns
+        // let rowCount = obj.length;                                                  // Count of the Rows
+        // let table = document.createElement('table');
+        // table.setAttribute("id", val);
+        // document.getElementById(val).appendChild(table);                            // Use "data-list" in HTML
+
+        var form = document.createElement('form');
+        form.id="details";
+        document.body.appendChild(form);
+
+        var tableDiv  = document.createElement('div');
+        tableDiv.setAttribute("id", "tabDiv");
+        form.appendChild(tableDiv);
+
+        var table = document.createElement("table");
+        table.setAttribute("id", "responsive-" + val);
+        tableDiv.appendChild(table);
+
+        var removeTable = function() {
+            if (val === 'today-table') {
+                deleteRow('responsive-today-table');
+            }
+            else if (val === 'tomorrow-table') {
+                deleteRow('responsive-tomorrow-table');
+            }
+        };
+
+        var btnDelete = document.createElement('input');
+        btnDelete.type = "button";
+        btnDelete.value = "Delete";
+        btnDelete.onclick = removeTable;
+        form.appendChild(btnDelete);
+
+        var btnClick = document.createElement('input');
+        btnClick.type = "submit";
+        btnClick.value = "Add Row";
+        btnClick.onclick = addTable;
+        form.appendChild(btnClick);
+
+        var addForm = document.createElement('div');
+        form.appendChild(addForm);
+
+        var row = document.createElement("tr");
+        var cell = document.createElement("th");
+        row.appendChild(cell);
+        cell.innerHTML = "\t";
+        var cell = document.createElement("th");
+        row.appendChild(cell);
+        cell.innerHTML = "\t";
+        table.appendChild(row);
+        Object.keys(obj[0]).forEach(function(val) {
+            var cell = document.createElement("th");
+            row.appendChild(cell);
+            cell.innerHTML = "<h2>" + val + "</h2>";
+        });
+        var cell = document.createElement("th");
+        row.appendChild(cell);
+        cell.innerHTML = "<h2>Action</h2>";
+
+        for (var i = 0; i < obj.length; i++) {
+            var btnSave = document.createElement('button');
+            btnSave.innerHTML = "Save";
+            btnSave.onclick = saveCell;
+
+            var btnEdit = document.createElement('input');
+            btnEdit.type = "button";
+            btnEdit.value = "Edit";
+            btnEdit.onclick = editCell;
+
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.id= "checkBox";
+
+            var row = document.createElement("tr");
+            table.appendChild(row);
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+            cell.appendChild(checkbox);
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+            cell.innerHTML = i;
+            for (key in obj[i]) {
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.innerHTML = obj[i][key];
+            }
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+            cell.appendChild(btnEdit);
+            cell.appendChild(btnSave);
+        }
+
+        var time = document.createElement('input');
+        time.type = "text";
+        time.id = "time-var";
+        time.placeholder = "Time";
+        time.required = true;
+        addForm.appendChild(time);
+
+        var description = document.createElement('input');
+        description.type = "text";
+        description.id = "desc-var";
+        description.placeholder = "Description";
+        description.required = true;
+        addForm.appendChild(description);
+
+        var addTable = function() {
+            var btnSave = document.createElement('button');
+            btnSave.innerHTML = "Save";
+            btnSave.onclick = saveCell;
+
+            var btnEdit = document.createElement('input');
+            btnEdit.type = "button";
+            btnEdit.value = "Edit";
+            btnEdit.onclick = editCell;
+
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.id= "checkBox";
+            var row = document.createElement("tr");
+            if((time.value!="")&&(description.value!="")){
+
+                table.appendChild(row);
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.appendChild(checkbox);
+
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.innerHTML = i++;
+
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.innerHTML = time.value;
+
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.innerHTML = description.value;
+
+                var cell = document.createElement("td");
+                row.appendChild(cell);
+                cell.appendChild(btnEdit);
+                cell.appendChild(btnSave);
+
+                document.getElementById("details").reset();
+            }
+            else {
+                alert("Enter Input Values");
+            }
+        };
+
+        var btnClick = document.createElement('input');
+        btnClick.type = "submit";
+        btnClick.value = "Add Row";
+        btnClick.onclick = addTable;
+        form.appendChild(btnClick);
+    }
+
+    function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            for(var i = 0; i < rowCount; i++) {
+                var row = table.rows[i];
+                var checkbox = row.cells[0].childNodes[0];
+                if(checkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+        }
+        catch(e) {
+            alert(e);
+        }
+    }
+
+    function editCell(e) {
+
+        console.log(e);
+        var t = e.target.parentElement.parentElement;
+        console.log(t);
+        var trs = t.getElementsByTagName("tr");
+        console.log(trs);
+        tds = t.getElementsByTagName("td");
+
+        // console.log(document.getElementById('time-var'));
+        time = document.getElementById('time-var');
+        tds[2].appendChild(time);
+
+        description = document.getElementById('desc-var');
+        tds[3].appendChild(description);
+        curr = t;
+    }
+
+    function saveCell() {
+        if(curr != undefined)
+        {
+            var inputs = curr.getElementsByTagName("td");
+            for(var i = 2; i < inputs.length - 1; i++)
+            {
+                currInput = inputs[i].getElementsByTagName("input");
+                currInput[0].parentElement.innerHTML = currInput[0].value;
+            }
+            curr = undefined;
+        }
+    }
+
+
     function createTab(obj, val) {
         let columnHeadings = Object.keys(obj[0]);                                   // Table Headings
         let columnCount = columnHeadings.length;                                    // Count of the Columns
@@ -257,6 +472,7 @@
             // Parse JSON string into object
             let actual_JSON = JSON.parse(response);
             let json = getDays(actual_JSON, dayName);
+            responsiveTable(json, val);
             return createTab(json, val);
         });
     }
@@ -369,7 +585,7 @@
 
 <!-- Tab content -->
 <div id="today" class="tabcontent">
-    <h3>Today's Tasks</h3>
+    <h2>Today's Tasks</h2>
     <p>London is the capital city of England.</p>
     <table id="today-table"></table>
     <!--<script type="text/javascript">-->
@@ -385,7 +601,7 @@
 </div>
 
 <div id="tomorrow" class="tabcontent">
-    <h3>Tomorrow's Tasks</h3>
+    <h2>Tomorrow's Tasks</h2>
     <p>Paris is the capital of France.</p>
     <table id="tomorrow-table"></table>
 </div>
