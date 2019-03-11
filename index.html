@@ -180,6 +180,7 @@
         let rowCount = obj.length;                                                  // Count of the Rows
         let table = document.createElement('table');
         table.setAttribute("id", val);
+        document.getElementById(val).appendChild(table);                            // Use "data-list" in HTML
 
         let header = table.createTHead();
         let row = header.insertRow(-1);
@@ -200,7 +201,7 @@
                 cell.innerText = object[columnHeadings[j]];
             }
         }
-        console.log(table);
+        // console.log(table);
         return table;
     }
 
@@ -212,12 +213,12 @@
         if(val == 'today') {
             table = document.createElement('table', { id : 'today-table' });              // Create the Table
             document.getElementById("today").appendChild(table);                    // Use "data-list" in HTML
-            console.log("Today");
+            // console.log("Today");
         }
         else if(val == 'tomorrow') {
             table = document.createElement('table', { id : 'tomorrow-table' });           // Create the Table
             document.getElementById("tomorrow").appendChild(table);                    // Use "data-list" in HTML
-            console.log("Tomorrow");
+            // console.log("Tomorrow");
         }
         // document.getElementById("data-list").appendChild(table);                    // Use "data-list" in HTML
 
@@ -256,7 +257,6 @@
             // Parse JSON string into object
             let actual_JSON = JSON.parse(response);
             let json = getDays(actual_JSON, dayName);
-            console.log(createTab(json, val));
             return createTab(json, val);
         });
     }
@@ -305,6 +305,8 @@
 
         // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(dayName).style.display = "block";
+        document.getElementById(dayName + '-table').style.display = "block";
+        // console.log(dayName + '-table');
         event.currentTarget.className += " active";
     }
 
@@ -370,6 +372,16 @@
     <h3>Today's Tasks</h3>
     <p>London is the capital city of England.</p>
     <table id="today-table"></table>
+    <!--<script type="text/javascript">-->
+        <!--document.addEventListener("DOMContentLoaded", function(event) {-->
+            <!--// - Code to execute when all DOM content is loaded.-->
+            <!--// - including fonts, images, etc.-->
+            <!--console.log("bk")-->
+            <!--let table = tabStart('today-table');-->
+            <!--table.setAttribute("id", 'today');-->
+
+        <!--});-->
+    <!--</script>-->
 </div>
 
 <div id="tomorrow" class="tabcontent">
