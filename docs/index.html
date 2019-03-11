@@ -4,88 +4,89 @@
     <meta charset="UTF-8">
     <title>Wiredelta Challenge</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <!--<style>-->
-    <!--/* Dropdown Button */-->
-    <!--.dropbtn {-->
-        <!--background-color: #4CAF50;-->
-        <!--color: white;-->
-        <!--padding: 16px;-->
-        <!--font-size: 16px;-->
-        <!--border: none;-->
-    <!--}-->
+<!--/* Dropdown Button */-->
+<!--.dropbtn {-->
+<!--background-color: #4CAF50;-->
+<!--color: white;-->
+<!--padding: 16px;-->
+<!--font-size: 16px;-->
+<!--border: none;-->
+<!--}-->
 
-    <!--/* The container <div> - needed to position the dropdown content */-->
-    <!--.dropdown {-->
-        <!--position: relative;-->
-        <!--display: inline-block;-->
-    <!--}-->
+<!--/* The container <div> - needed to position the dropdown content */-->
+<!--.dropdown {-->
+<!--position: relative;-->
+<!--display: inline-block;-->
+<!--}-->
 
-    <!--/* Dropdown Content (Hidden by Default) */-->
-    <!--.dropdown-content {-->
-        <!--display: none;-->
-        <!--position: absolute;-->
-        <!--background-color: #f1f1f1;-->
-        <!--min-width: 160px;-->
-        <!--box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);-->
-        <!--z-index: 1;-->
-    <!--}-->
+<!--/* Dropdown Content (Hidden by Default) */-->
+<!--.dropdown-content {-->
+<!--display: none;-->
+<!--position: absolute;-->
+<!--background-color: #f1f1f1;-->
+<!--min-width: 160px;-->
+<!--box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);-->
+<!--z-index: 1;-->
+<!--}-->
 
-    <!--/* Links inside the dropdown */-->
-    <!--.dropdown-content p {-->
-        <!--color: black;-->
-        <!--padding: 12px 16px;-->
-        <!--text-decoration: none;-->
-        <!--display: block;-->
-    <!--}-->
+<!--/* Links inside the dropdown */-->
+<!--.dropdown-content p {-->
+<!--color: black;-->
+<!--padding: 12px 16px;-->
+<!--text-decoration: none;-->
+<!--display: block;-->
+<!--}-->
 
-    <!--/* Change color of dropdown links on hover */-->
-    <!--.dropdown-content p:hover {background-color: #ddd;}-->
+<!--/* Change color of dropdown links on hover */-->
+<!--.dropdown-content p:hover {background-color: #ddd;}-->
 
-    <!--/* Show the dropdown menu on hover */-->
-    <!--.dropdown:hover .dropdown-content {display: block;}-->
+<!--/* Show the dropdown menu on hover */-->
+<!--.dropdown:hover .dropdown-content {display: block;}-->
 
-    <!--/* Change the background color of the dropdown button when the dropdown content is shown */-->
-    <!--.dropdown:hover .dropbtn {background-color: #3e8e41;}-->
+<!--/* Change the background color of the dropdown button when the dropdown content is shown */-->
+<!--.dropdown:hover .dropbtn {background-color: #3e8e41;}-->
 
 
-    <!--/*Style for Tabs*/-->
+<!--/*Style for Tabs*/-->
 
-    <!--/* Style the tab */-->
-    <!--.tab {-->
-        <!--overflow: hidden;-->
-        <!--border: 1px solid #ccc;-->
-        <!--background-color: #f1f1f1;-->
-    <!--}-->
+<!--/* Style the tab */-->
+<!--.tab {-->
+<!--overflow: hidden;-->
+<!--border: 1px solid #ccc;-->
+<!--background-color: #f1f1f1;-->
+<!--}-->
 
-    <!--/* Style the buttons that are used to open the tab content */-->
-    <!--.tab button {-->
-        <!--background-color: inherit;-->
-        <!--float: left;-->
-        <!--border: none;-->
-        <!--outline: none;-->
-        <!--cursor: pointer;-->
-        <!--padding: 14px 16px;-->
-        <!--transition: 0.3s;-->
-    <!--}-->
+<!--/* Style the buttons that are used to open the tab content */-->
+<!--.tab button {-->
+<!--background-color: inherit;-->
+<!--float: left;-->
+<!--border: none;-->
+<!--outline: none;-->
+<!--cursor: pointer;-->
+<!--padding: 14px 16px;-->
+<!--transition: 0.3s;-->
+<!--}-->
 
-    <!--/* Change background color of buttons on hover */-->
-    <!--.tab button:hover {-->
-        <!--background-color: #ddd;-->
-    <!--}-->
+<!--/* Change background color of buttons on hover */-->
+<!--.tab button:hover {-->
+<!--background-color: #ddd;-->
+<!--}-->
 
-    <!--/* Create an active/current tablink class */-->
-    <!--.tab button.active {-->
-        <!--background-color: #ccc;-->
-    <!--}-->
+<!--/* Create an active/current tablink class */-->
+<!--.tab button.active {-->
+<!--background-color: #ccc;-->
+<!--}-->
 
-    <!--/* Style the tab content */-->
-    <!--.tabcontent {-->
-        <!--display: none;-->
-        <!--padding: 6px 12px;-->
-        <!--border: 1px solid #ccc;-->
-        <!--border-top: none;-->
-    <!--}-->
+<!--/* Style the tab content */-->
+<!--.tabcontent {-->
+<!--display: none;-->
+<!--padding: 6px 12px;-->
+<!--border: 1px solid #ccc;-->
+<!--border-top: none;-->
+<!--}-->
 
 <!--</style>-->
 <body onload="start()">
@@ -114,7 +115,7 @@
                 });
             }
         }
-       return jsonArr;
+        return jsonArr;
     }
 
 
@@ -448,7 +449,7 @@
         }
         var tBody = document.createElement('tbody');                // Create table body
         table.appendChild(tBody);
-                                                                    // Add the data rows to the table body
+        // Add the data rows to the table body
         for (var i = 0; i < rowCount; i++) {                        // Each row
             row = tBody.insertRow(-1);
             for (var j = 0; j < columnCount; j++) {                 // Each column
@@ -459,7 +460,7 @@
             }
         }
     }
-    
+
     function dynamicTitle() {
         var title = document.getElementById('title-text');
         document.title = title.value;
@@ -586,23 +587,23 @@
 <!-- Tab content -->
 <div id="today" class="tabcontent">
     <h2>Today's Tasks</h2>
-    <p>London is the capital city of England.</p>
+    <p>Random Inspirational Message</p>
     <table id="today-table"></table>
     <!--<script type="text/javascript">-->
-        <!--document.addEventListener("DOMContentLoaded", function(event) {-->
-            <!--// - Code to execute when all DOM content is loaded.-->
-            <!--// - including fonts, images, etc.-->
-            <!--console.log("bk")-->
-            <!--let table = tabStart('today-table');-->
-            <!--table.setAttribute("id", 'today');-->
+    <!--document.addEventListener("DOMContentLoaded", function(event) {-->
+    <!--// - Code to execute when all DOM content is loaded.-->
+    <!--// - including fonts, images, etc.-->
+    <!--console.log("bk")-->
+    <!--let table = tabStart('today-table');-->
+    <!--table.setAttribute("id", 'today');-->
 
-        <!--});-->
+    <!--});-->
     <!--</script>-->
 </div>
 
 <div id="tomorrow" class="tabcontent">
     <h2>Tomorrow's Tasks</h2>
-    <p>Paris is the capital of France.</p>
+    <p>Random Inspirational Message</p>
     <table id="tomorrow-table"></table>
 </div>
 
