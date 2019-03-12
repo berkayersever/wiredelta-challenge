@@ -119,12 +119,14 @@ h2 a {
 /* Style the buttons that are used to open the tab content */
 .tab button {
     background-color: inherit;
+    color: #1F2739;
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
+    font-size: 15px;
 }
 
 /* Change background color of buttons on hover */
@@ -144,3 +146,98 @@ h2 a {
     border: 1px solid #ccc;
     border-top: none;
 }
+
+/* Dropdown Button - Can Be Deleted*/
+.dropbtn {
+    background-color: #FB667A;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* Dropdown Button - Can Be Deleted*/
+.tab .dropdown-tab .dropbtn-tab {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* Dropdown Button */
+/*.dropbtn {*/
+    /*background-color: #FB667A;*/
+    /*color: white;*/
+    /*padding: 16px;*/
+    /*font-size: 16px;*/
+    /*border: none;*/
+/*}*/
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-tab {
+    position: center;
+    display: inline-block;
+}
+
+    /*!* The container <div> - needed to position the dropdown content - Can Be Deleted *!*/
+/*.dropdown {*/
+    /*position: relative;*/
+    /*display: inline-block;*/
+/*}*/
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.tab .dropdown-tab .dropdown-content-tab {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Links inside the dropdown */
+.tab .dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content p:hover {background-color: #ddd;}
+.tab .dropdown-content-tab p:hover {background-color: black;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+/*.dropdown-tab:hover .dropdown-content-tab {display: block;}*/
+.dropdown-tab:hover .dropdown-content-tab {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+/*.dropdown-tab:hover .dropbtn-tab {background-color: #3e8e41;}*/
+.dropdown-tab:hover .dropbtn-tab {background-color: #3e8e41;}
+
+/*div.tab button.tablinks div.dropdown-tab*/
