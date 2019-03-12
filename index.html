@@ -535,10 +535,26 @@
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunctionBackground() {
+        document.getElementById("myDropdown-background").classList.toggle("show");
+    }
+
     // Close the dropdown if the user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+        else if (!event.target.matches('.dropbtn-tab')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content-tab");
             var i;
             for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
@@ -560,6 +576,17 @@
     <button class="tablinks" onclick="openTab(event, 'today')">Today</button>
     <!--<button class="tablinks" onclick="tomorrow()">Tomorrow</button>-->
     <button class="tablinks" onclick="openTab(event, 'tomorrow')">Tomorrow</button>
+    <button class="tablinks" onclick="changeBackground(this.value)"></button>
+    <div class="dropdown-tab">
+        <button onclick="myFunctionBackground()" class="dropbtn-tab" style="float: right;">Background Color</button>
+        <div id="myDropdown-background" class="dropdown-content-tab" onclick="changeBackground(this.value)">
+            <p onclick="changeBackground('red')">Red</p>
+            <p onclick="changeBackground('green')">Green</p>
+            <p onclick="changeBackground('blue')">Blue</p>
+            <p onclick="changeBackground('white')">White</p>
+            <p onclick="changeBackground('#1F2739')">Default
+        </div>
+    </div>
 </div>
 
 <div align="center">
@@ -581,13 +608,14 @@
         <p onclick="changeBackground('green')">Green</p>
         <p onclick="changeBackground('blue')">Blue</p>
         <p onclick="changeBackground('white')">White</p>
+        <p onclick="changeBackground('#1F2739')">Default</p>
     </div>
 </div>
 
 <!-- Tab content -->
 <div id="today" class="tabcontent">
     <h2>Today's Tasks</h2>
-    <p>Random Inspirational Message</p>
+    <p>Random Inspirational Message</p>     // TODO
     <table id="today-table"></table>
     <!--<script type="text/javascript">-->
         <!--document.addEventListener("DOMContentLoaded", function(event) {-->
@@ -603,7 +631,7 @@
 
 <div id="tomorrow" class="tabcontent">
     <h2>Tomorrow's Tasks</h2>
-    <p>Random Inspirational Message</p>
+    <p>Random Inspirational Message</p>     // TODO
     <table id="tomorrow-table"></table>
 </div>
 
